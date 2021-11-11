@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.taskweek2.ui
+package com.example.taskweek2.ui.home
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +23,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskweek2.R
-import com.example.taskweek2.model.UnsplashPhoto
 
 class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 //    val imageView: ImageView = view.findViewById(R.id.item_photo_iv)

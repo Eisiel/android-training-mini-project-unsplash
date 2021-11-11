@@ -1,8 +1,6 @@
-package com.example.taskweek2.ui
+package com.example.taskweek2.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +14,6 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 //import com.example.taskweek2.Injection
-import com.example.taskweek2.R
 import com.example.taskweek2.databinding.UnsplashSearchFragmentBinding
 import com.example.taskweek2.model.UnsplashPhoto
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +28,7 @@ class UnsplashSearchFragment : Fragment() {
     private lateinit var binding: UnsplashSearchFragmentBinding
 
     @Inject
-    lateinit var photoAdapter:PhotoAdapter
+    lateinit var photoAdapter: PhotoAdapter
 //    private lateinit var viewModel: UnsplashSearchViewModel
 
 //    @Inject

@@ -3,30 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/unsplashSearchFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.taskweek2.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.taskweek2.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
     <fragment
         android:id="@+id/unsplashSearchFragment"
-        android:name="com.example.taskweek2.ui.UnsplashSearchFragment"
+        android:name="com.example.taskweek2.ui.home.UnsplashSearchFragment"
         android:label="UnsplashSearchFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.taskweek2.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_unsplashSearchFragment"
+            app:destination="@id/unsplashSearchFragment" />
+    </fragment>
 </navigation>

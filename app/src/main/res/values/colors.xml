@@ -8,6 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+    <!--    COLOR PALLET APPLICATION-->
+    <color name="primary_Black">#111111</color>
+    <color name="primary_Warning">#CC3333</color>
+
+
+
     <!--Please do not override those colors-->
     <color name="pickerColorBackground">#ffffffff</color>
     <color name="pickerColorDarkOverlay">#dd000000</color>

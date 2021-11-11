@@ -1,4 +1,4 @@
-package com.example.taskweek2.ui
+package com.example.taskweek2.ui.home
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

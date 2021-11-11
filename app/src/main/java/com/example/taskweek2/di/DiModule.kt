@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.taskweek2.api.UnsplashService
 import com.example.taskweek2.db.RepoDatabase
-import com.example.taskweek2.ui.PhotoAdapter
+import com.example.taskweek2.ui.home.PhotoAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

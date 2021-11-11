@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.taskweek2.ui
+package com.example.taskweek2.ui.home
 
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
@@ -22,7 +22,6 @@ import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.example.taskweek2.repository.UnsplashRepository
 import java.lang.IllegalArgumentException
-import javax.inject.Inject
 
 class ViewModelFactory (
     owner: SavedStateRegistryOwner,

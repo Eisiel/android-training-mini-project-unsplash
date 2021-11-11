@@ -5,8 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:focusable="true"
+    android:background="@color/primary_Black"
     android:focusableInTouchMode="true"
+    android:fontFamily="@font/nexa_bold"
     android:layout_height="match_parent">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout"
         android:layout_width="0dp"

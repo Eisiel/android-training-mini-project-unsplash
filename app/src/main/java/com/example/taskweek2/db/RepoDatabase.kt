@@ -26,7 +26,6 @@ abstract class RepoDatabase : RoomDatabase() {
                 INSTANCE
                     ?: buildDatabase(context).also { INSTANCE = it }
             }
-
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
                 RepoDatabase::class.java, "Unsplash.db")
