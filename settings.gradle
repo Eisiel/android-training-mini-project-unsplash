@@ -6,5 +6,5 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "TaskWeek2"
+rootProject.name = "miniproject"
 include ':app'

@@ -8,11 +8,11 @@
 
     <fragment
         android:id="@+id/unsplashSearchFragment"
-        android:name="com.example.taskweek2.ui.home.UnsplashSearchFragment"
+        android:name="com.example.miniproject.ui.home.UnsplashSearchFragment"
         android:label="UnsplashSearchFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.taskweek2.ui.login.LoginFragment"
+        android:name="com.example.miniproject.ui.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_unsplashSearchFragment"

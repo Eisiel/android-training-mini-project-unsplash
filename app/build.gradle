@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.androidkotlin"
+        applicationId "com.example.miniproject"
         minSdkVersion min_sdk_version
         targetSdkVersion compile_sdk_version
         versionCode 1
