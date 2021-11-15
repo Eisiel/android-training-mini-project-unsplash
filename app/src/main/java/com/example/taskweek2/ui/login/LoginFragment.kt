@@ -7,18 +7,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.RemoteMediator
+import com.example.taskweek2.api.LoginServices
 import com.example.taskweek2.databinding.FragmentLoginBinding
+import com.example.taskweek2.di.ApiLoginModule
+import com.example.taskweek2.ui.home.PhotoAdapter
 import com.google.android.material.snackbar.Snackbar
-import android.R
-import com.example.taskweek2.retrofit.LoginRetrofit
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
+
+    @Inject
+    lateinit var provideretrofitLogin: LoginServices
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -53,7 +66,19 @@ class LoginFragment : Fragment() {
                     .setBackgroundTint(Color.RED)
                     .setAction("Action", null).show()
             }else{
-
+                lifecycleScope.launch {
+                    try {
+                        val apiResponse = provideretrofitLogin.login("454041184B0240FBA3AACD15A1F7A8BB",email, password)
+                        val results = apiResponse.data
+                    }catch (exception: IOException) {
+                        Log.d("Login", "Error IOException: ${exception.localizedMessage}")
+                    } catch (exception: HttpException) {
+                        Log.d("Login", "Error HttpException: ${exception.localizedMessage}")
+                        Snackbar.make(view, "Password atau Email anda salah!", Snackbar.LENGTH_LONG)
+                            .setBackgroundTint(Color.RED)
+                            .setAction("Action", null).show()
+                    }
+                }
             }
 
         }
