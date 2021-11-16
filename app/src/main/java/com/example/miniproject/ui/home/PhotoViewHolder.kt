@@ -28,8 +28,6 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val imageView: ImageView = view.findViewById(R.id.item_unsplash_photo_image_view)
     val txtView: TextView = view.findViewById(R.id.item_unsplash_photo_text_view)
 
-
-
     companion object {
         fun create(parent: ViewGroup): PhotoViewHolder {
             val view = LayoutInflater.from(parent.context)

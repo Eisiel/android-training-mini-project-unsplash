@@ -37,7 +37,7 @@ import javax.inject.Inject
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 @AndroidEntryPoint
-class LogoutFragment : Fragment() {
+class LogoutFragment : Fragment(), SessionManager.LogoutListener {
 
     private var _binding: FragmentLogoutBinding? = null
 
@@ -45,10 +45,8 @@ class LogoutFragment : Fragment() {
     lateinit var provideretrofitLogin: LoginServices
 
     @Inject
-    lateinit var aesEncryp: AESEncrypts
+    lateinit var aesEncrypt: AESEncrypts
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -56,6 +54,9 @@ class LogoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLogoutBinding.inflate(inflater, container, false)
+
+        SessionManager.registerSessionListener(this)
+
         binding.logout.setOnClickListener {
             // clear preference
             val prefs: SharedPreferences = requireActivity().getSharedPreferences("LOGIN_DATA", Context.MODE_PRIVATE)
@@ -70,15 +71,15 @@ class LogoutFragment : Fragment() {
         return binding.root
 }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-    public fun sessionDone(){
-        findNavController().navigate(R.id.loginFragment)
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun doLogout() {
+        activity?.runOnUiThread {
+            findNavController(binding.root)
+                .navigate(R.id.action_logoutFragment_to_loginFragment)
+        }
     }
 }

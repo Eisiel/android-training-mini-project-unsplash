@@ -36,7 +36,6 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
 
     private val viewModel: UnsplashSearchViewModel by viewModels()
     private lateinit var binding: UnsplashSearchFragmentBinding
-    private lateinit var views: View
 
     @Inject
     lateinit var photoAdapter: PhotoAdapter
@@ -68,8 +67,8 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
 
         binding.unsplashProfile.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_unsplashSearchFragment_to_logoutFragment)
-
         }
+
         return binding.root
     }
 
@@ -101,8 +100,9 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
         onQueryChanged: (UiAction.Search) -> Unit
     ) {
         unsplashPickerEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
+            if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_DONE  ) {
                 updateRepoListFromInput(onQueryChanged)
+                activity?.hideSoftKeyboard()
                 true
             } else {
                 false
@@ -112,7 +112,6 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 updateRepoListFromInput(onQueryChanged)
                 activity?.hideSoftKeyboard()
-
                 true
             } else {
                 false
@@ -177,13 +176,6 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
 
         lifecycleScope.launch {
             photoAdapter.loadStateFlow.collect { loadState ->
-                // Show a retry header if there was an error refreshing, and items were previously
-                // cached OR default to the default prepend state
-//                header.loadState = loadState.mediator
-//                    ?.refresh
-//                    ?.takeIf { it is LoadState.Error && photoAdapter.itemCount > 0 }
-//                    ?: loadState.prepend
-
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && photoAdapter.itemCount == 0
                 // show empty list
                 emptyList.isVisible = isListEmpty
@@ -193,18 +185,6 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
                 progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
                 retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error && photoAdapter.itemCount == 0
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-//                val errorState = loadState.source.append as? LoadState.Error
-//                    ?: loadState.source.prepend as? LoadState.Error
-//                    ?: loadState.append as? LoadState.Error
-//                    ?: loadState.prepend as? LoadState.Error
-//                errorState?.let {
-//                    Toast.makeText(
-//                        this@SearchRepositoriesActivity,
-//                        "\uD83D\uDE28 Wooops ${it.error}",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
             }
         }
 
@@ -249,17 +229,10 @@ class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
     }
 
     override fun doLogout() {
-        Log.d("Login","Logout_Unsplash")
         activity?.runOnUiThread {
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_unsplashSearchFragment_to_loginFragment)
         }
-
-
-    }
-
-    fun onUserInteraction() {
-        SessionManager.resetSession()
     }
 }
 

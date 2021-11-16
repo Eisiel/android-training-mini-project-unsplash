@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "photos")
 data class UnsplashPhoto(
-//    @PrimaryKey(autoGenerate = true) val id: Long,
     var query: String? = null,
     @PrimaryKey @field:SerializedName("id") val id: String,
     @field:SerializedName("created_at") val created_at: String,

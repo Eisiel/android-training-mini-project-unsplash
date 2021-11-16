@@ -16,9 +16,9 @@ class UnsplashRepository @Inject constructor (
     private val database: RepoDatabase
 ) {
     fun getSearchResultStream(query: String): Flow<PagingData<UnsplashPhoto>> {
-        // appending '%' so we can allow other characters to be before and after the query string
         val dbQuery = "%${query.replace(' ', '%')}%"
-        val pagingSourceFactory =  { database.reposDao().reposByName(dbQuery)}
+        val pagingSourceFactory =  { database.reposDao().reposByQuery(dbQuery)}
+
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
@@ -35,6 +35,6 @@ class UnsplashRepository @Inject constructor (
     }
 
     companion object {
-        const val NETWORK_PAGE_SIZE = 10
+        const val NETWORK_PAGE_SIZE = 20
     }
 }

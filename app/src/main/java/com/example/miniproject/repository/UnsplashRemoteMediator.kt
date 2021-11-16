@@ -22,8 +22,6 @@ class UnsplashRemoteMediator(
     private val repoDatabase: RepoDatabase
 ) : RemoteMediator<Int, UnsplashPhoto>() {
 
-//    private val query = "Android"
-
     override suspend fun load(loadType: LoadType, state: PagingState<Int, UnsplashPhoto>): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {

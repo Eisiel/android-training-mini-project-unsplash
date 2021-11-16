@@ -15,7 +15,7 @@ interface RepoDao {
 
     @Query("SELECT * FROM photos WHERE " +
             "query LIKE :queryString ")
-    fun reposByName(queryString: String): PagingSource<Int, UnsplashPhoto>
+    fun reposByQuery(queryString: String): PagingSource<Int, UnsplashPhoto>
 
     @Query("DELETE FROM photos")
     suspend fun clearRepos()

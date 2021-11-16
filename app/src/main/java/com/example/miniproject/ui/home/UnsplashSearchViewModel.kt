@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val VISIBLE_THRESHOLD = 5
 private const val LAST_SEARCH_QUERY: String = "last_search_query"
 // This is outside the ViewModel class, but in the same file
 private const val LAST_QUERY_SCROLLED: String = "last_query_scrolled"
@@ -30,7 +29,6 @@ class UnsplashSearchViewModel @Inject constructor (
     val accept: (UiAction) -> Unit
 
     init {
-
         val initialQuery: String = savedStateHandle.get(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
         val lastQueryScrolled: String = savedStateHandle.get(LAST_QUERY_SCROLLED) ?: DEFAULT_QUERY
         val actionStateFlow = MutableSharedFlow<UiAction>()

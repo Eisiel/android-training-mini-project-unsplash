@@ -42,27 +42,25 @@ class LoginFragment : Fragment() {
     @Inject
     lateinit var aesEncryp: AESEncrypts
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // bind button
         binding.login.setOnClickListener {
             val email = binding.email.editText?.text.toString()
             val password = binding.userPassword.editText?.text.toString()
 
+            //assert not empty email & password
             if (email == "" || password == ""){
                 var varNull = "Password"
                 if (email == "" && password == ""){
@@ -74,6 +72,7 @@ class LoginFragment : Fragment() {
                     .setBackgroundTint(Color.RED)
                     .setAction("Action", null).show()
             }else{
+                //set loading visible
                 binding.progressLoader.visibility = View.VISIBLE
 
                 lifecycleScope.launch {
@@ -81,30 +80,32 @@ class LoginFragment : Fragment() {
                         // send post
                         val apiResponse = provideretrofitLogin.login("454041184B0240FBA3AACD15A1F7A8BB",email, password)
                         val results = apiResponse.data
+
                         // encrypt
                         val encryptResult = aesEncryp.encryptData(results.toString())
+
                         // Preferench
                         val sharedPreference =  requireActivity().getSharedPreferences("LOGIN_DATA", Context.MODE_PRIVATE)
                         var editor = sharedPreference.edit()
                         editor.putString("LoginData", encryptResult.toString())
                         editor.putLong("l",100L)
                         editor.commit()
+
+                        // Reset session (for auto-logout)
                         SessionManager.resetSession()
-                        // loading bar
+
+                        // set loading invisible
                         binding.progressLoader.visibility = View.INVISIBLE
+
                         // navigate
-                        //view.findNavController().navigate(R.id.action_loginFragment_to_unsplashSearchFragment)
                         view.findNavController().navigate(R.id.action_loginFragment_to_unsplashSearchFragment)
+
                     }catch (exception: IOException) {
-                        //error log
-                        Log.d("Login", "Error IOException: ${exception.localizedMessage}")
                         Snackbar.make(view, exception.localizedMessage, Snackbar.LENGTH_LONG)
                             .setBackgroundTint(Color.RED)
                             .setAction("Action", null).show()
                         binding.progressLoader.visibility = View.INVISIBLE
                     } catch (exception: HttpException) {
-                        // error log
-                        Log.d("Login", "Error HttpException: ${exception.localizedMessage}")
                         Snackbar.make(view, "Password atau Email anda salah!", Snackbar.LENGTH_LONG)
                             .setBackgroundTint(Color.RED)
                             .setAction("Action", null).show()
@@ -115,9 +116,7 @@ class LoginFragment : Fragment() {
 
         }
     }
-    public fun sessionDone(){
-        findNavController().navigate(R.id.loginFragment)
-    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

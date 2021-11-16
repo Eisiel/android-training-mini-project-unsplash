@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/unsplashSearchFragment">
+    app:startDestination="@id/loginFragment">
 
 
     <fragment
@@ -63,5 +63,10 @@
         <argument android:name="desc"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_photoDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/unsplashSearchFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

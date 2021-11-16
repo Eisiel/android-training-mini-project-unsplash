@@ -2,27 +2,21 @@ package com.example.miniproject.service
 
 import android.app.Application
 import android.util.Log
+import com.example.miniproject.ui.home.PhotoDetailFragment
 import com.example.miniproject.ui.home.UnsplashSearchFragment
+import com.example.miniproject.ui.logout.LogoutFragment
 import java.util.*
 
 
 class SessionManager : Application() {
-
-    private val logoutListener: LogoutListener? = null
-    private val timer: Timer? = null
-
     interface LogoutListener {
         fun doLogout()
     }
-    override fun onCreate() {
-        super.onCreate()
-    }
 
     companion object {
-        lateinit var binding: UnsplashSearchFragment
         private var logoutListener: LogoutListener? = null
         private var timer: Timer? = null
-        fun userSessionStart() {
+        private fun userSessionStart() {
             if (timer != null) {
                 timer!!.cancel()
             }
@@ -30,7 +24,6 @@ class SessionManager : Application() {
             timer!!.schedule(object : TimerTask() {
                 override fun run() {
                     if (logoutListener != null) {
-                        Log.d("Login","Session end")
                         logoutListener!!.doLogout()
                     }
                 }
@@ -42,6 +35,14 @@ class SessionManager : Application() {
         }
 
         fun registerSessionListener(listener: UnsplashSearchFragment) {
+            logoutListener = listener
+        }
+
+        fun registerSessionListener(listener: PhotoDetailFragment) {
+            logoutListener = listener
+        }
+
+        fun registerSessionListener(listener: LogoutFragment) {
             logoutListener = listener
         }
     }
