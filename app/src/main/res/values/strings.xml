@@ -13,9 +13,17 @@
     <string name="search_hint">Search Unsplash</string>
     <string name="no_results">No results 😓</string>
     <string name="string_Login">Login</string>
+    <string name="string_Logout">Logout</string>
+    <string name="string_Accountname">Demo Account</string>
+    <string name="string_createdby">Marcel - Tengku</string>
+
     <string name="string_Password">Password</string>
     <string name="string_Email">Email Address</string>
     <string name="string_Unsplash">Unslpash Main Logo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="preference_file_key"></string>
+    <string name="profile">Profile</string>
+
 </resources>

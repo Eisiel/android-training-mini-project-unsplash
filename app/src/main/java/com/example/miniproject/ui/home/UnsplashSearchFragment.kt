@@ -15,23 +15,28 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.miniproject.R
 //import com.example.miniproject.Injection
 import com.example.miniproject.databinding.UnsplashSearchFragmentBinding
 import com.example.miniproject.model.UnsplashPhoto
+import com.example.miniproject.service.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UnsplashSearchFragment : Fragment() {
+class UnsplashSearchFragment : Fragment(),  SessionManager.LogoutListener {
 
     private val viewModel: UnsplashSearchViewModel by viewModels()
     private lateinit var binding: UnsplashSearchFragmentBinding
+    private lateinit var views: View
 
     @Inject
     lateinit var photoAdapter: PhotoAdapter
@@ -48,6 +53,7 @@ class UnsplashSearchFragment : Fragment() {
             pagingData = viewModel.pagingDataFlow,
             uiActions = viewModel.accept
         )
+        SessionManager.registerSessionListener(this)
 
         appBarState = AppBarState.IDLE
 
@@ -60,6 +66,10 @@ class UnsplashSearchFragment : Fragment() {
             updateUiFromState()
         }
 
+        binding.unsplashProfile.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_unsplashSearchFragment_to_logoutFragment)
+
+        }
         return binding.root
     }
 
@@ -217,11 +227,14 @@ class UnsplashSearchFragment : Fragment() {
 
                 // right clear button on top of edit text gone
                 binding.unsplashPickerClearImageView.visibility = View.GONE
+                binding.unsplashProfile.visibility = View.VISIBLE
 
             }
             AppBarState.SEARCHING -> {
                 // search buttons gone
                 binding.unsplashPickerSearchImageView.visibility = View.GONE
+                binding.unsplashProfile.visibility = View.GONE
+
                 // edit text visible and focused
                 binding.unsplashPickerEditText.visibility = View.VISIBLE
 
@@ -233,6 +246,20 @@ class UnsplashSearchFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun doLogout() {
+        Log.d("Login","Logout_Unsplash")
+        activity?.runOnUiThread {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_unsplashSearchFragment_to_loginFragment)
+        }
+
+
+    }
+
+    fun onUserInteraction() {
+        SessionManager.resetSession()
     }
 }
 

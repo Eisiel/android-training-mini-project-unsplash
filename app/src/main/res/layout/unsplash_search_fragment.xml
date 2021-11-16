@@ -26,22 +26,22 @@
 
     <EditText
         android:id="@+id/unsplash_picker_edit_text"
-        android:padding="8dp"
-        android:hint="Search free photos"
-        android:layout_margin="8dp"
-        android:textSize="14sp"
-        android:background="@drawable/shape_rectangle_round_white"
         android:layout_width="0dp"
-        android:visibility="gone"
-        android:singleLine="true"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_rectangle_round_white"
+        android:hint="Search free photos"
+        android:imeOptions="actionDone"
         android:lines="1"
         android:maxLines="1"
-        android:imeOptions="actionDone"
-        app:layout_constraintTop_toTopOf="@+id/unsplash_picker_title_text_view"
+        android:padding="8dp"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/unsplash_picker_title_text_view"
         app:layout_constraintLeft_toLeftOf="@+id/unsplash_picker_title_text_view"
         app:layout_constraintRight_toRightOf="@+id/unsplash_picker_title_text_view"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="@+id/unsplash_picker_title_text_view" />
 
     <ImageView
         android:id="@+id/unsplash_picker_search_image_view"
@@ -110,6 +110,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/unsplash_picker_title_text_view" />
+
+
+    <ImageView
+        android:id="@+id/unsplash_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@string/profile"
+        android:padding="6dp"
+        android:src="@drawable/ic_user_white"
+        app:layout_constraintBottom_toBottomOf="@+id/unsplash_picker_title_text_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/unsplash_picker_title_text_view"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
