@@ -9,31 +9,6 @@
     android:fontFamily="@font/nexa_bold"
     android:layout_height="match_parent">
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/input_layout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginLeft="8dp"-->
-<!--        android:layout_marginRight="8dp"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-<!--        <EditText-->
-<!--            android:id="@+id/search_repo"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="@string/search_hint"-->
-<!--            android:imeOptions="actionSearch"-->
-<!--            android:inputType="textNoSuggestions"-->
-<!--            android:selectAllOnFocus="true"-->
-<!--            android:textColor="@color/white"-->
-<!--            tools:text="Android"/>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
     <TextView
         android:id="@+id/unsplash_picker_title_text_view"
         android:layout_width="0dp"
@@ -48,17 +23,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="8dp"
         android:text="Unsplash"/>
-
-<!--    <ImageView-->
-<!--        android:contentDescription="@string/back"-->
-<!--        android:id="@+id/unsplash_picker_back_image_view"-->
-<!--        android:padding="8dp"-->
-<!--        android:src="@drawable/ic_arrow_back_24dp"-->
-<!--        app:layout_constraintLeft_toLeftOf="@+id/unsplash_picker_title_text_view"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/unsplash_picker_title_text_view"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/unsplash_picker_title_text_view"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
 
     <EditText
         android:id="@+id/unsplash_picker_edit_text"

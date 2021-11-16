@@ -20,11 +20,6 @@ import javax.inject.Singleton
 @Module
 class ApiModule {
 
-//    @Provides
-//    fun provideUnsplashService(): UnsplashService {
-//        return UnsplashService.create()
-//    }
-
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context): RepoDatabase {

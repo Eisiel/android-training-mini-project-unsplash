@@ -25,7 +25,6 @@ class UnsplashRemoteMediator(
 //    private val query = "Android"
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, UnsplashPhoto>): MediatorResult {
-        Log.e("mediator", loadType.toString())
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -53,11 +52,7 @@ class UnsplashRemoteMediator(
 
         try {
             val apiResponse = service.searchPhotos(apiQuery, page, state.config.pageSize)
-            Log.e("mediator", page.toString())
-            Log.e("mediator", apiQuery)
             val repos = apiResponse.results
-            Log.e("mediator", apiResponse.toString())
-            Log.e("mediator", repos.toString())
             // Set query, to be retrieved later by database
             repos.forEach{ it.query = apiQuery }
 

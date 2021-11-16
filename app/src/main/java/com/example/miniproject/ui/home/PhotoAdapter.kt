@@ -17,13 +17,18 @@
 package com.example.miniproject.ui.home
 
 import android.graphics.Color
+import android.util.Log
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.example.miniproject.R
 import com.example.miniproject.model.UnsplashPhoto
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
-class PhotoAdapter: PagingDataAdapter<UnsplashPhoto, PhotoViewHolder>(REPO_COMPARATOR) {
+class PhotoAdapter : PagingDataAdapter<UnsplashPhoto, PhotoViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         return PhotoViewHolder.create(parent)
@@ -34,8 +39,14 @@ class PhotoAdapter: PagingDataAdapter<UnsplashPhoto, PhotoViewHolder>(REPO_COMPA
         getItem(position)?.let { photo ->
             // image
             holder.itemView.setBackgroundColor(Color.parseColor(photo.color))
+            holder.imageView.setOnClickListener {
+                val action = UnsplashSearchFragmentDirections.actionUnsplashSearchFragmentToPhotoDetailFragment(photo.urls.regular, photo.user.name, photo.description)
+                Navigation.findNavController(it).navigate(action)
+            }
+
             Picasso.get().load(photo.urls.small)
                 .into(holder.imageView)
+
             // photograph name
             holder.txtView.text = photo.user.name
         }
@@ -46,45 +57,11 @@ class PhotoAdapter: PagingDataAdapter<UnsplashPhoto, PhotoViewHolder>(REPO_COMPA
             override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean =
+            override fun areContentsTheSame(
+                oldItem: UnsplashPhoto,
+                newItem: UnsplashPhoto
+            ): Boolean =
                 oldItem == newItem
         }
     }
-
-//    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-//        val repoItem = getItem(position)
-//        if (repoItem != null)
-//            holder.bind(repoItem)
-//    }
-
-//    fun setListOfPhotos(listOfPhotos: ArrayList<UnsplashPhoto>?) {
-//        if (listOfPhotos != null) {
-//            mListOfPhotos = listOfPhotos
-//            notifyDataSetChanged()
-//        }
-//    }
 }
-
-//class ReposAdapter: PagingDataAdapter<UnsplashPhoto, RepoViewHolder>(REPO_COMPARATOR) {
-//
-//    companion object {
-//        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<UnsplashPhoto>() {
-//            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean =
-//                oldItem.photo_id == newItem.photo_id
-//
-//            override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean =
-//                oldItem == newItem
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
-//        return RepoViewHolder.create(parent)
-//    }
-//
-//    override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-//        val repoItem = getItem(position)
-//        if (repoItem != null)
-//            holder.bind(repoItem)
-//    }
-//
-//}

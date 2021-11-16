@@ -49,8 +49,7 @@ class LoginFragment : Fragment() {
         binding.login.setOnClickListener {
             val email = binding.email.editText?.text.toString()
             val password = binding.userPassword.editText?.text.toString()
-            Log.d("Debug Login", "username: $email")
-            Log.d("Debug Login", "password: $password")
+
             if (email == "" || password == ""){
                 var varNull = "Password"
                 if (email == "" && password == ""){
